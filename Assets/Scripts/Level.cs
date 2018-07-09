@@ -43,12 +43,12 @@ public class Level : MonoBehaviour {
 		if (rightSide) {
 			for (int i = 0; i < count; i++) {
 				//Instantiate (prefab, new Vector3 (Random.Range (spawnRadius, bounds), Random.Range (-spawnRadius, spawnRadius), 0), Quaternion.identity);
-				Instantiate (prefab, new Vector3 (Random.Range (-bounds, bounds), Random.Range (-bounds, bounds), 0), Quaternion.identity); //spawns on Y according to bounds and not radius
+				Instantiate (prefab, new Vector3 (Random.Range (-horizontalBounds, horizontalBounds), Random.Range (-verticalBounds, verticalBounds), 0), Quaternion.identity); //spawns on Y according to bounds and not radius
 			}
 		} else {
 			for (int i = 0; i < count; i++) {
 				//Instantiate (prefab, new Vector3 (Random.Range (-spawnRadius, -bounds), Random.Range (-spawnRadius, spawnRadius), 0), Quaternion.identity);
-				Instantiate (prefab, new Vector3 (Random.Range (-bounds, bounds), Random.Range (-bounds, bounds), 0), Quaternion.identity); //spawns on Y according to bounds and not radius
+				Instantiate (prefab, new Vector3 (Random.Range (-horizontalBounds, horizontalBounds), Random.Range (-verticalBounds, verticalBounds), 0), Quaternion.identity); //spawns on Y according to bounds and not radius
 			}
 		}
 	}
@@ -85,4 +85,5 @@ public class Level : MonoBehaviour {
 
 		return returnEnemies;
 	}
+		
 }

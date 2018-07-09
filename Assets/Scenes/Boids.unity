@@ -230,6 +230,7 @@ MonoBehaviour:
   numberOfMembers: 200
   members: []
   enemies: []
+  staticEnemies: []
   bounds: 100
   spawnRadius: 50
   rightToLeft: 0
@@ -261,16 +262,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFOV: 120
   maxAcceleration: 40
-  maxVelocity: 25
+  maxVelocity: 30
   wanderJitter: 10
-  wanderRadius: 2
-  wanderDistance: 3
+  wanderRadius: 4
+  wanderDistance: 5
   wanderPriority: 10
   cohesionRadius: 20
-  cohesionPriority: 10
+  cohesionPriority: 60
   alignmentRadius: 10
   alignmentPriority: 90
-  separationRaidus: 10
-  separationPriority: 100
-  avoidanceRadius: 40
-  avoidancePriority: 1000
+  separationRaidus: 20
+  separationPriority: 90
+  avoidanceRadius: 90
+  avoidancePriority: 1500

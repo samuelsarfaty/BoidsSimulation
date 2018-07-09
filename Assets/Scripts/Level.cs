@@ -15,14 +15,15 @@ public class Level : MonoBehaviour {
 
 	public float bounds;
 	public float spawnRadius;
+	public bool spawnRight;
 
 	// Use this for initialization
-	void Start () { //Spawn objects
+	void Start () {
 		members = new List<Member> ();
 		enemies = new List<Enemy> ();
 
 		//Spawn (memberPrefab, numberOfMembers);
-		SpawnRight(memberPrefab, numberOfMembers);
+		SpawnOnSide(memberPrefab, numberOfMembers, spawnRight);
 		Spawn (enemyPrefab, numberOfEnemies);
 
 		members.AddRange (FindObjectsOfType<Member> ());
@@ -35,10 +36,17 @@ public class Level : MonoBehaviour {
 		}
 	}
 
-	void SpawnRight(Transform prefab, int count){// Spawn function but to spanw members on the side of the screen
-		for (int i = 0; i < count; i++) {
-			//Instantiate (prefab, new Vector3 (Random.Range (-spawnRadius, spawnRadius), Random.Range (-spawnRadius, spawnRadius), 0), Quaternion.identity);
-			Instantiate (prefab, new Vector3 (Random.Range(spawnRadius, bounds), Random.Range (-spawnRadius, spawnRadius), 0), Quaternion.identity);
+	void SpawnOnSide(Transform prefab, int count, bool rightSide){// Spawn function but to spanw members on the side of the screen
+		if (rightSide) {
+			for (int i = 0; i < count; i++) {
+				//Instantiate (prefab, new Vector3 (Random.Range (spawnRadius, bounds), Random.Range (-spawnRadius, spawnRadius), 0), Quaternion.identity);
+				Instantiate (prefab, new Vector3 (Random.Range (spawnRadius, bounds), Random.Range (-bounds, bounds), 0), Quaternion.identity); //spawns on Y according to bounds and not radius
+			}
+		} else {
+			for (int i = 0; i < count; i++) {
+				//Instantiate (prefab, new Vector3 (Random.Range (-spawnRadius, -bounds), Random.Range (-spawnRadius, spawnRadius), 0), Quaternion.identity);
+				Instantiate (prefab, new Vector3 (Random.Range (-spawnRadius, -bounds), Random.Range (-bounds, bounds), 0), Quaternion.identity); //spawns on Y according to bounds and not radius
+			}
 		}
 	}
 

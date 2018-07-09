@@ -232,6 +232,7 @@ MonoBehaviour:
   enemies: []
   bounds: 100
   spawnRadius: 50
+  spawnRight: 0
 --- !u!4 &880381624
 Transform:
   m_ObjectHideFlags: 0

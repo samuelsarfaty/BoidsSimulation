@@ -8,25 +8,25 @@ public class MemberConfig : MonoBehaviour {
 	public float maxAcceleration;
 	public float maxVelocity;
 
-	//Wandering variables
+	[Header("Wandering Parameters")]
 	public float wanderJitter;
 	public float wanderRadius;
 	public float wanderDistance;
 	public float wanderPriority;
 
-	//Cohesion
+	[Header("Cohesion Parameters")]
 	public float cohesionRadius;
 	public float cohesionPriority;
 
-	//Alignment
+	[Header("Alignment Parameters")]
 	public float alignmentRadius;
 	public float alignmentPriority;
 
-	//Separation
+	[Header("Separation Parameters")]
 	public float separationRaidus;
 	public float separationPriority;
 
-	//Avoidance
+	[Header("Avoidance Parameters")]
 	public float avoidanceRadius;
 	public float avoidancePriority;
 

@@ -13,7 +13,7 @@ public class Member : MonoBehaviour {
 	public MemberConfig conf;
 
 	private Vector3 wanderTarget;
-	private Vector3 push = new Vector3 (1,0,0); //add push after Combine
+	private Vector3 push = new Vector3 (); //add push after Combine
 
 	void Start()
 	{
@@ -22,18 +22,26 @@ public class Member : MonoBehaviour {
 
 		position = transform.position;
 		velocity = new Vector3 (Random.Range (-3, 3), Random.Range (-3, 3), 0);
+
+		if (level.rightToLeft) {
+			push = push + new Vector3 (-1, 0, 0);
+		} else {
+			push = push + new Vector3 (1, 0, 0);
+		}
+
 	}
 
 	void Update ()
 	{
-		acceleration = Combine () + push;
+		acceleration = CombineWithPush ();
 		acceleration = Vector3.ClampMagnitude (acceleration, conf.maxAcceleration);
 		velocity = velocity + acceleration * Time.deltaTime;
 		velocity = Vector3.ClampMagnitude (velocity, conf.maxVelocity);
 
 		position = position + velocity * Time.deltaTime;
 
-		WrapAround (ref position, -level.bounds, level.bounds);
+		//WrapAround (ref position, -level.bounds, level.bounds);
+		WrapAroundRectangle(ref position, -level.horizontalBounds, level.horizontalBounds, -level.verticalBounds, level.verticalBounds); //Rectangular play area
 
 		transform.position = position;
 	}
@@ -170,12 +178,22 @@ public class Member : MonoBehaviour {
 
 	virtual protected Vector3 Combine(){ //Uses both cohesion and wander multiplied by their priorities to guide object's behavior.
 		Vector3 finalVec = conf.cohesionPriority * Cohesion () + 
-			//conf.wanderPriority * Wander () +
-			conf.wanderPriority * WanderWithDirection (level.rightToLeft) + //TODO test this function but return to previous for normal behavior
+			conf.wanderPriority * Wander () +
 			conf.alignmentPriority * Alignment() + 
 			conf.separationPriority * Separation() + 
 			conf.avoidancePriority * Avoidance();
 		
+		return finalVec;
+	}
+
+	virtual protected Vector3 CombineWithPush(){
+		Vector3 finalVec = conf.cohesionPriority * Cohesion () + 
+			//conf.wanderPriority * Wander () +
+			conf.wanderPriority * (WanderWithDirection (level.rightToLeft) + push) + //TODO test this function but return to previous for normal behavior
+			conf.alignmentPriority * Alignment() + 
+			conf.separationPriority * Separation() + 
+			conf.avoidancePriority * Avoidance();
+
 		return finalVec;
 	}
 
@@ -184,6 +202,17 @@ public class Member : MonoBehaviour {
 		vector.x = WrapAroundFloat (vector.x, min, max);
 		vector.y = WrapAroundFloat (vector.y, min, max);
 		vector.z = WrapAroundFloat (vector.z, min, max);
+	}
+
+	void WrapAroundRectangle(ref Vector3 vector, float horMin, float horMax, float verMin, float verMax)
+	{
+		/*vector.x = WrapAroundFloat (vector.x, min, max);
+		vector.y = WrapAroundFloat (vector.y, min, max);
+		vector.z = WrapAroundFloat (vector.z, min, max);*/
+
+		vector.x = WrapAroundFloat (vector.x, horMin, horMax);
+		vector.y = WrapAroundFloat (vector.y, verMin, verMax);
+		vector.z = WrapAroundFloat (vector.z, horMin, horMax);
 	}
 
 

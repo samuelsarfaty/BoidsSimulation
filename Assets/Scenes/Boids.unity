@@ -233,6 +233,8 @@ MonoBehaviour:
   bounds: 100
   spawnRadius: 50
   rightToLeft: 0
+  horizontalBounds: 200
+  verticalBounds: 100
 --- !u!4 &880381624
 Transform:
   m_ObjectHideFlags: 0
@@ -265,10 +267,10 @@ MonoBehaviour:
   wanderDistance: 3
   wanderPriority: 10
   cohesionRadius: 20
-  cohesionPriority: 20
+  cohesionPriority: 10
   alignmentRadius: 10
   alignmentPriority: 90
   separationRaidus: 10
-  separationPriority: 130
+  separationPriority: 100
   avoidanceRadius: 40
-  avoidancePriority: 10000
+  avoidancePriority: 1000

@@ -15,7 +15,7 @@ public class Level : MonoBehaviour {
 
 	public float bounds;
 	public float spawnRadius;
-	public bool spawnRight;
+	public bool rightToLeft;
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +23,7 @@ public class Level : MonoBehaviour {
 		enemies = new List<Enemy> ();
 
 		//Spawn (memberPrefab, numberOfMembers);
-		SpawnOnSide(memberPrefab, numberOfMembers, spawnRight);
+		SpawnOnSide(memberPrefab, numberOfMembers, rightToLeft);
 		Spawn (enemyPrefab, numberOfEnemies);
 
 		members.AddRange (FindObjectsOfType<Member> ());
@@ -36,7 +36,7 @@ public class Level : MonoBehaviour {
 		}
 	}
 
-	void SpawnOnSide(Transform prefab, int count, bool rightSide){// Spawn function but to spanw members on the side of the screen
+	void SpawnOnSide(Transform prefab, int count, bool rightSide){// Spawn function but to spawn members on the side of the screen
 		if (rightSide) {
 			for (int i = 0; i < count; i++) {
 				//Instantiate (prefab, new Vector3 (Random.Range (spawnRadius, bounds), Random.Range (-spawnRadius, spawnRadius), 0), Quaternion.identity);
